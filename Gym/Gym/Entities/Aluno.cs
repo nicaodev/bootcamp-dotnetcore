@@ -9,7 +9,7 @@ namespace Gym.Entities
         {
         }
 
-        public Aluno(string nome, int endereco, DateTime dataNascimento)
+        public Aluno(string nome, string endereco, DateTime dataNascimento)
         {
             Nome = nome;
             Endereco = endereco;
@@ -19,7 +19,7 @@ namespace Gym.Entities
 
         public int Id { get; private set; }
         public string Nome { get; private set; }
-        public int Endereco { get; private set; }
+        public string Endereco { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public StatusAlunoEnum Status { get; private set; }
     }

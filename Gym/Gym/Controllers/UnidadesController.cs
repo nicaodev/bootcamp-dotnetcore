@@ -1,49 +1,42 @@
-﻿using Gym.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Gym.Controllers
 {
-    [Route("api/alunos")]
     [ApiController]
-    public class AlunosController : ControllerBase
+    [Route("api/Unidades")]
+    public class UnidadesController : ControllerBase
     {
+        //api/Unidades
         [HttpGet]
         public IActionResult Get()
         {
-            var alunos = new List<Aluno>
-            {
-                new Aluno("Nicolas", "Rua 3", DateTime.Now),
-                new Aluno("Nicolas Alexandre", "Rua 3", DateTime.Now),
-                new Aluno("Nicolas Pereira", "Rua 3", DateTime.Now)
-            };
-
-            return Ok(alunos);
+            return Ok();
         }
 
-        //api/alunos/4
+        //api/Unidades/1
         [HttpGet("{id}")]
         public IActionResult GetId(int id)
         {
             return Ok();
         }
 
-        //api/alunos
+        //api/Unidades
         [HttpPost]
         public IActionResult Post()
         {
             return Ok();
         }
 
-        //api/alunos/4
+        //api/Unidades/1
         [HttpPut("{id}")]
         public IActionResult Put(int id)
         {
             return Ok();
         }
 
-        //api/alunos/4
+        //api/Unidades/1
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
