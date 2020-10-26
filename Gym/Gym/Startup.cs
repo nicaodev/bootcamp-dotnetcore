@@ -1,5 +1,7 @@
+using Gym.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +24,15 @@ namespace Gym
             services.AddSwaggerGen(c =>
               c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gym API", Version = "v1" })
            );
+
+            var connectionString = Configuration.GetConnectionString("GymCn");
+
+            services.AddDbContext<GymDbContext>(opt =>
+                opt.UseSqlServer(connectionString));
+
+            // Para usar em memoria, ao inves de salvar no banco de dados
+            //services.AddDbContext<GymDbContext>(opt =>
+            //    opt.UseInMemoryDatabase("GymCn"));
 
             services.AddControllers();
         }

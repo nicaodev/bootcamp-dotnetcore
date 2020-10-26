@@ -22,5 +22,12 @@ namespace Gym.Entities
         public string Endereco { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public StatusAlunoEnum Status { get; private set; }
+
+        // Propriedades de navegação no banco de dados.
+        public int IdUnidade { get; private set; }
+        public Unidade Unidade{ get; private set; } 
+        
+        public int IdProfessor { get; private set; }
+        public Professor Professor{ get; private set; }
     }
 }
