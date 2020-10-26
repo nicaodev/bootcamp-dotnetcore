@@ -31,6 +31,7 @@ namespace Gym
                 opt.UseSqlServer(connectionString));
 
             // Para usar em memoria, ao inves de salvar no banco de dados
+
             //services.AddDbContext<GymDbContext>(opt =>
             //    opt.UseInMemoryDatabase("GymCn"));
 
