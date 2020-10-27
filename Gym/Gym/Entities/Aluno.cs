@@ -25,9 +25,17 @@ namespace Gym.Entities
 
         // Propriedades de navegação no banco de dados.
         public int IdUnidade { get; private set; }
-        public Unidade Unidade{ get; private set; } 
-        
+        public Unidade Unidade { get; private set; }
+
         public int IdProfessor { get; private set; }
-        public Professor Professor{ get; private set; }
+        public Professor Professor { get; private set; }
+
+        public void tornaInativo()
+        {
+            if (Status != StatusAlunoEnum.Ativo)
+                throw new Exception("Já não está ativo!");
+
+            Status = StatusAlunoEnum.Inativo;
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Gym.Entities;
+using Gym.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gym.Controllers
 {
@@ -9,15 +11,17 @@ namespace Gym.Controllers
     [ApiController]
     public class AlunosController : ControllerBase
     {
+        private readonly GymDbContext _gymDbContext;
+        public AlunosController(GymDbContext gymDbContext)
+        {
+            _gymDbContext = gymDbContext;
+        }
         [HttpGet]
         public IActionResult Get()
         {
-            var alunos = new List<Aluno>
-            {
-                new Aluno("Nicolas", "Rua 3", DateTime.Now),
-                new Aluno("Nicolas Alexandre", "Rua 3", DateTime.Now),
-                new Aluno("Nicolas Pereira", "Rua 3", DateTime.Now)
-            };
+            var alunos = _gymDbContext
+               .Alunos
+               .ToList();
 
             return Ok(alunos);
         }
@@ -26,28 +30,51 @@ namespace Gym.Controllers
         [HttpGet("{id}")]
         public IActionResult GetId(int id)
         {
-            return Ok();
+            var aluno = _gymDbContext.Alunos.SingleOrDefault(a => a.Id == id);
+
+            if (aluno == null)
+                return NotFound();
+
+            return Ok(aluno);
         }
 
         //api/alunos
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody] Aluno aluno)
         {
-            return Ok();
+            _gymDbContext.Alunos.Add(aluno);
+            _gymDbContext.SaveChanges();
+
+            return CreatedAtAction(nameof(GetId), aluno, new { id = aluno.Id });
         }
 
         //api/alunos/4
         [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int id, [FromBody] Aluno aluno)
         {
-            return Ok();
+            if (!_gymDbContext.Alunos.Any(x => x.Id == id))
+                return NotFound();
+
+            _gymDbContext.Alunos.Update(aluno);
+            _gymDbContext.SaveChanges();
+
+            return NoContent();
         }
 
         //api/alunos/4
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return Ok();
+            var aluno = _gymDbContext.Alunos.SingleOrDefault(x => x.Id == id);
+
+            if (aluno == null)
+                return NotFound();
+
+            //_gymDbContext.Alunos.Remove(aluno);
+            aluno.tornaInativo();
+            _gymDbContext.SaveChanges();
+
+            return NoContent();
         }
     }
 }
