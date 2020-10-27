@@ -25,6 +25,7 @@ namespace Gym.Entities
 
         // Propriedades de navegação no banco de dados.
         public int IdUnidade { get; private set; }
+
         public Unidade Unidade { get; private set; }
     }
 }

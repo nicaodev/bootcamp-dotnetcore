@@ -12,10 +12,12 @@ namespace Gym.Controllers
     public class UnidadesController : ControllerBase
     {
         private readonly GymDbContext _gymDbContext;
+
         public UnidadesController(GymDbContext gymDbContext)
         {
             _gymDbContext = gymDbContext;
         }
+
         //api/Unidades
         [HttpGet]
         public IActionResult Get()

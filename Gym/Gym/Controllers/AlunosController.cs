@@ -1,8 +1,6 @@
 ﻿using Gym.Entities;
 using Gym.Persistence;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Gym.Controllers
@@ -12,10 +10,12 @@ namespace Gym.Controllers
     public class AlunosController : ControllerBase
     {
         private readonly GymDbContext _gymDbContext;
+
         public AlunosController(GymDbContext gymDbContext)
         {
             _gymDbContext = gymDbContext;
         }
+
         [HttpGet]
         public IActionResult Get()
         {
